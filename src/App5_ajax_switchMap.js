@@ -1,0 +1,53 @@
+import React from 'react';
+
+import {
+  setObservableConfig,
+  componentFromStream,
+} from 'recompose';
+import * as Rx from 'rxjs/Rx';
+
+setObservableConfig({
+  fromESObservable: Rx.Observable.from,
+});
+
+const { Observable } = Rx;
+const personById = id =>
+  `https://swapi.co/api/people/${id}`;
+
+const Card = props => (
+  <div>
+    <h1>{ props.name }</h1>
+    <h2>{ props.homeworld }</h2>
+  </div>
+);
+
+const loadById = id =>
+  Observable.ajax(personById(id))
+    .pluck('response')
+    .switchMap(
+      response =>
+        Observable.ajax(response.homeworld)
+          .pluck('response')
+          .startWith({ name: '' }),
+      (person, homeworld) => ({
+        ...person,
+        homeworld: homeworld.name,
+      }),
+    );
+
+const CardStream = componentFromStream(props$ =>
+  props$
+    .switchMap(props =>
+      loadById(props.id),
+    )
+    .map(Card),
+);
+
+const App = () => (
+  <div>
+    <Card name='John' homeworld='Earth' />
+    <CardStream id={ 1 } />
+  </div>
+);
+
+export default App;
