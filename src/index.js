@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App6_event_form_handling';
+import App from './App7_event_buttonClick(counter)';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App
