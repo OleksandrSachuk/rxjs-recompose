@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App8_with_interval';
+import App from './App9_click_and_ajax_request';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App

@@ -15,7 +15,7 @@ const interval = mapPropsStream(props$ =>
     props => Observable.interval(1000),
     (props, count) => ({ ...props, count }),
   ),
-)
+);
 
 const Counter = props => <h1>{ props.count }</h1>;
 
