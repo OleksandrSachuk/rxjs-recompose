@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App9_click_and_ajax_request';
+import App from './App/App10_stream_in_render';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App
